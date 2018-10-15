@@ -1,4 +1,7 @@
 <?php
+//image output folder path
+$folder = "/img";
+
 // Set default each image block width, height, margin by px
 $tileWidth = 250;
 $tileHeight = 250;
@@ -95,9 +98,9 @@ if ($numberOfTiles <= 1) {
 
     }
 
-    imagejpeg($mapImage, "./himg/image1.jpg", 100);
+    imagejpeg($mapImage, ".".$folder."/image1.jpg", 100);
 
-    echo '<img style="max-width:90%" src=https://ubest.club/himg/image1.jpg?' . time() . '>'; // make sure no cache image shown
+    echo '<img style="max-width:90%" src=/'.$folder.'/image1.jpg?' . time() . '>'; // make sure no cache image shown
 
 }
 
