@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta id="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Combine multiple images to one image file</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        #loader {
+            position: relative;
+            left: 50%;
+            top: 50px;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+            display: none;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="flex-center h4">Combine 1x2, 1x3, 2x2, 2x3, 3x3 images to one image file</div>
+    <br>
+    <div class="flex-center">
+        <form id="fm">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="img1">Input Image URL*</label>
+                    <input type="text" class="form-control" name="img1" value="https://images-na.ssl-images-amazon.com/images/I/51clDRQFM0L._SL1000_.jpg">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="img2">Input Image URL*</label>
+                    <input type="text" class="form-control" name="img2" value="https://med.stanford.edu/researchit/infrastructure/clinical-data-warehouse/_jcr_content/main/panel_builder/panel_0/feature_box.img.full.high.jpeg">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="img3">Input Image URL</label>
+                    <input type="text" class="form-control" name="img3" placeholder="Input Image URL">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="img4" placeholder="Input Image URL">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="img5" placeholder="Input Image URL">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="img6" placeholder="Input Image URL">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="img7" placeholder="Input Image URL">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="img8" placeholder="Input Image URL">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="img9" placeholder="Input Image URL">
+                </div>
+            </div>
+            <div class="flex-center">
+                <button id="go" type="submit" class="btn blue-gradient btn-rounded">Combine All to One!</button>
+            </div>
+        </form>
+    </div>
+    <br><br>
+    <div id="loader" class="flex-center"></div>
+    <div id="board" class="flex-center"></div>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script>
+
+        function show() {
+            document.getElementById("loader").style.display = "block";
+        }
+        
+        function hide() {
+            document.getElementById("loader").style.display = "none";
+        }
+
+        $(document).ready(function () {
+            $('#go').click(function (event) {
+                event.preventDefault();
+                $('#board').html('');
+                show();
+                $.post('cbimg1.php',
+                    $('#fm').serializeArray(),
+                    function (data, status) {
+                        hide();
+                        $('#board').html(data);
+                    }
+                );
+            });
+        });
+    </script>
+</body>
+
+</html>
